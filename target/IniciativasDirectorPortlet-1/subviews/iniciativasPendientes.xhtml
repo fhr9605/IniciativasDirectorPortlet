@@ -1,0 +1,88 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:c="http://java.sun.com/jsp/jstl/core"
+	>
+
+	<f:subview>
+		<h:form id="h-form-iniciativas-pendiente">
+			<h:panelGrid id="h-pg-iniciativas-pendiente">
+				<p:dialog id="p-d-detalle-investigador"  widgetVar="verDetalleInvestigadorDialog" closeOnEscape="true" modal="true"
+									width="50%" resizable="false" responsive="true" onHide="PF('verDetalleInvestigadorDialog').hide()">
+					Hola aqui van los detalles del investigador
+				</p:dialog>
+				
+				<p:dialog id="p-d-detalle-iniciativas"  widgetVar="verDetalleIniciativaDialog" closeOnEscape="true" modal="true"
+									width="50%" resizable="false" responsive="true" onHide="PF('verDetalleIniciativaDialog').hide()">
+						hola 
+						<h:outputText value="#{iniciativasDirectorController.iniciativaDetalle.programa}"/>
+						
+						
+						<ui:repeat id="ui-rep-mostrar-preguntas-iniciativas" var="preguntas"
+							value="#{iniciativasDirectorController.iniciativaDetalle.preguntasIniciativa}" varStatus="varStatus">
+								
+							<p:outputLabel value="#{preguntas.nroPregunta}"/>
+							<p:outputLabel value="#{preguntas.respuesta}"/>
+						
+						</ui:repeat>
+						
+				</p:dialog>
+				
+				
+			
+				<p:dataTable id="p-dt-iniciativas-pendiente" var="iniciativaPendiente"
+							value="#{iniciativasDirectorController.lstIniciativasPendiente}"
+							emptyMessage="No hay iniciativas pendientes">
+							
+					<p:columnGroup type="header">
+						<p:row>
+							<p:column colspan="5" headerText="Iniciativa" />
+		            		<p:column colspan="2" headerText="Acciones" />
+		            	</p:row>
+						<p:row styleClass="encabezado-gris">
+							<p:column headerText="ID iniciativa" visible="false" />
+					        <p:column headerText="Programa" />
+					        <p:column headerText="Titulo de la iniciativa" />
+					        <p:column headerText="Estado" />
+					        <p:column headerText="Investigador" />
+					        <p:column headerText="Discutida con el lider"/>
+					        <p:column headerText="Detalles del investigador" />
+					        <p:column headerText="Detalles de la iniciativa" />
+					    </p:row>
+					</p:columnGroup>
+							
+					<p:column headerText="ID iniciativa" visible="false">
+						<h:outputText value="#{iniciativaPendiente.idIniciativa}"/>
+					</p:column>
+					<p:column headerText="Programa">
+						<h:outputText value="#{iniciativaPendiente.programa}"/>
+					</p:column>
+					<p:column headerText="Titulo de la iniciativa">
+						<h:outputText value="#{iniciativaPendiente.tituloIniciativa}"/>
+					</p:column>
+					<p:column headerText="Estado">
+						<h:outputText value="#{iniciativaPendiente.estado}"/>
+					</p:column>
+					<p:column headerText="Investigador">
+						<h:outputText value="#{iniciativaPendiente.investigador}"/>
+					</p:column>
+					<p:column headerText="Discutida con el lider">
+						<h:outputText value="#{iniciativaPendiente.discutidaLider}"/>
+					</p:column>
+					<p:column headerText="Detalles del investigador">
+						<p:commandLink value="Ver" update="#{p:component('h-form-iniciativas-pendiente')}" oncomplete="PF('verDetalleInvestigadorDialog').show()"> 
+							<f:setPropertyActionListener value="#{iniciativaPendiente}" target="#{iniciativasDirectorController.iniciativaDetalle}" />
+						</p:commandLink>
+					</p:column>
+					<p:column headerText="Detalles de la iniciativa">
+						<p:commandLink value="Ver" update="#{p:component('h-form-iniciativas-pendiente')}" oncomplete="PF('verDetalleIniciativaDialog').show()"> 
+							<f:setPropertyActionListener value="#{iniciativaPendiente}" target="#{iniciativasDirectorController.iniciativaDetalle}" />
+						</p:commandLink>
+					</p:column>
+				</p:dataTable>	
+ 			</h:panelGrid>
+		</h:form>
+	</f:subview>
+</ui:composition>

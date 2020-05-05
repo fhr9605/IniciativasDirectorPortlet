@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+
+<f:view
+	xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+>
+	<h:head>
+		<h:outputStylesheet library="css" name="main.css" />
+	</h:head>
+	<h:body>
+		<h:panelGrid id="h-pg-inicio">
+			<p:tabView id="p-tw-inicio">
+				<p:tab id="p-tab-pendientes" title="Iniciativas pendientes">
+					<h:panelGrid id="h-pg-iniciativa-pendiente">
+					   	<ui:include id ="iniciativaPendiente" src="/subviews/iniciativasPendientes.xhtml"/>
+					</h:panelGrid>
+				</p:tab>
+				<p:tab id="p-tab-citar" title="Citar">
+					Esta es la prueba del tab de citar
+				</p:tab>
+				<p:tab id="p-tab-banco" title="Banco de iniciativas">
+					Esta es la prueba del tab de banco de iniciativas
+				</p:tab>
+			</p:tabView>
+		</h:panelGrid>
+	</h:body>
+</f:view>
